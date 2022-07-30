@@ -14,6 +14,7 @@ app.use((req, res, next) => {
     res.header('content-type', 'application/json');
     next();
 })
+
 app.get('/v1/all/:d/:m/:y', async (req, res) => {
     const { d, m, y } = req.params;
     const date = new Date(`${d}/${m}/${y}`);
