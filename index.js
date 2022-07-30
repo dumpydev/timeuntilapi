@@ -2,10 +2,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const { log } = require('@dumpy/andylib')
-app.use(bodyParser.urlencoded({ extended: false }))
-
-app.use(bodyParser.json())
+const { log, logadv } = require('@dumpy/andylib')
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -16,8 +13,9 @@ app.use((req, res, next) => {
 })
 
 app.get('/v1/all/:d/:m/:y', async (req, res) => {
+    console.log(req.params)
     const { d, m, y } = req.params;
-    const date = new Date(`${d}/${m}/${y}`);
+    const date = new Date(`${y}-${m}-${d}`);
 
     const years = yearsUntil(date);
     const months = monthsUntil(date);
@@ -165,8 +163,8 @@ app.use((req, res, next) => {
 })
 
 /* Telling the server to listen on port 3000. */
-const server = app.listen(3000, () => {
-    log('listening on port 3000', 'info')
+const server = app.listen(4200, () => {
+    log('listening on port 4200', 'info')
 });
 
 server.on('connection', (socket) => {
